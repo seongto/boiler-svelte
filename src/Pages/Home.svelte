@@ -220,7 +220,7 @@
         <h1>나의 브랜드로<br>만드는 기회</h1>
         <p>나를 브랜딩하고,<br>새로운 프로젝트를 발견하세요.</p>
     </div>
-    <img alt="cover-image" width={imgWidth} src="{constants.IMG_URL}/static-images/landing-main-sample.jpg">
+    <img alt="cover-image" width={imgWidth} height={imgWidth} src="{constants.IMG_URL}/static-images/landing-main-sample.jpg">
 </div>
 <div class="sections brand-story">
     <h2 class="section-title">나만의 브랜드를 만들어가는 사람들을 만나보세요.</h2>
