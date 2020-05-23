@@ -4,10 +4,8 @@ import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 
-import autoPreprocess from 'svelte-preprocess'
 import scss from 'rollup-plugin-scss';
-import config from './svelte.config';
-
+import autoPreprocess from 'svelte-preprocess'
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -21,13 +19,17 @@ export default {
 	},
 	plugins: [
 		scss(),
-		svelte(config),
-		
-		// If you have external dependencies installed from
-		// npm, you'll most likely need these plugins. In
-		// some cases you'll need additional configuration -
-		// consult the documentation for details:
-		// https://github.com/rollup/plugins/tree/master/packages/commonjs
+		svelte({
+			/**
+			 * Auto preprocess supported languages with
+			 * '<template>'/'external src files' support
+			 **/
+			preprocess: autoPreprocess({ /* options */ })
+			/**
+			 * It is also possible to manually enqueue
+			 * stand-alone processors
+			 * */
+		}),
 		resolve({
 			browser: true,
 			dedupe: ['svelte']
