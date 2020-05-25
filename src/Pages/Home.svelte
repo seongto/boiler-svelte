@@ -4,29 +4,29 @@
 
     let brStroies = [
         {
-            "name" : "이름",
-            "title" : "타이틀",
-            "description" : "이것은 소개입니다. 이름은 이름입니다. 타이틀은 타이틀입니다. 얼라이어스.",
+            "name" : "박진규",
+            "title" : "성장중人 비즈니스 디벨로퍼",
+            "description" : "외부 환경에 나의 시간을 맡기지 않고, 스스로 미래를 만드는 삶을 사는 중입니다. 금융, 컨설팅, 전략 업무와 유니콘 스타트업에 대한 Case Study 콘텐츠를 쌓으면서 얻은 인사이트를 비즈니스로 풀어냅니다.",
             "link" : "https://blog.allius.io",
         },{
-            "name" : "이름",
-            "title" : "타이틀",
-            "description" : "이것은 소개입니다. 이름은 이름입니다. 타이틀은 타이틀입니다. 얼라이어스.",
+            "name" : "최보미",
+            "title" : "잘 들리게 포장합니다",
+            "description" : "잘 전달하기 위해 벗기기도 하고, 입히기도 하고, 뜯어보기도 하고, 해체하기도 합니다. 포장이라 했지만, 실은 언박싱 전문인 듯 합니다. 목넘김이 좋은 글을 씁니다.",
             "link" : "https://blog.allius.io",
         },{
-            "name" : "이름",
-            "title" : "타이틀",
-            "description" : "이것은 소개입니다. 이름은 이름입니다. 타이틀은 타이틀입니다. 얼라이어스.",
+            "name" : "장정은",
+            "title" : "스타트업 해결사",
+            "description" : "스타트업이 성장하는 과정에서 직면하는 다양한 리스크를 관리하여 안전하게 성장할 수 있도록 합니다. 스타트업의 성장을 막는 불필요하고 불합리한 규제를 개선하고 제도를 만들어가고 싶습니다.",
             "link" : "https://blog.allius.io",
         },{
-            "name" : "이름",
-            "title" : "타이틀",
-            "description" : "이것은 소개입니다. 이름은 이름입니다. 타이틀은 타이틀입니다. 얼라이어스.",
+            "name" : "오하니",
+            "title" : "향수 읽어주는 여자",
+            "description" : "\"왜 우리들에게 편안한 향은 없을까?\" 향기는 기억과 감정의 영향을 받습니다. 한국의 문화와 한국인의 감성으로 한국의 향을 만들고 세계에 한국을 이야기하고 싶습니다.",
             "link" : "https://blog.allius.io",
         },{
-            "name" : "이름",
-            "title" : "타이틀",
-            "description" : "이것은 소개입니다. 이름은 이름입니다. 타이틀은 타이틀입니다. 얼라이어스.",
+            "name" : "신재욱",
+            "title" : "시험을 당하는 자",
+            "description" : "배움을 갈구하고 성장을 목표로 합니다. 스타트업을 하며 끊임없이 마주하는 모험과 시험을 잘 이겨내고 싶습니다.",
             "link" : "https://blog.allius.io",
         },
     ];
@@ -184,11 +184,6 @@
         }
     }
 
-    function scrollToCenter(){
-
-    }
-
-
     onMount(() => {
         tutorialStage = JSON.parse(localStorage.getItem(constants.T_STAGE));
 
@@ -199,6 +194,7 @@
         }
 
         communityMessages = communityMessages.sort(mixArray);
+        brStroies = brStroies.sort(mixArray);
 
         communityEventList.scrollTo((communityEventList.scrollWidth/11)*5 -10, 0);
     });
