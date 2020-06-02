@@ -70,7 +70,7 @@
         {#each brStroies as item}
             <li bind:clientWidth={boxWidth} on:click={() => clickToLink(item["link"])}>
                 <span>{item["name"]}</span>
-                <textarea disabled readonly rows="2">{item["title"]}</textarea>
+                <textarea style="color:black;" readonly rows="2">{item["title"]}</textarea>
                 <p>{item["description"]}</p>
             </li>
         {/each}
@@ -128,12 +128,15 @@
                 }
 
                 textarea {
+                    display: block;
                     font-size: 1.2em;
                     line-height: 1.3em;
                     font-weight: 700;
                     border: none;
                     color: black;
                     resize: none;
+                    background-color: none;
+                    text-rendering: unset;
 
                     &:hover {
                         cursor: pointer;
