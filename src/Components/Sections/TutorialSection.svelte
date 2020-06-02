@@ -2,8 +2,6 @@
     import * as constants from '../../assets/js/constants.js';
     import { onMount } from 'svelte';
 
-    export let imgWidth;
-
     let tutorials = [
         {
             "text": "allius를 소개합니다",

@@ -4,6 +4,18 @@
 
     export let imgWidth;
 
+    let coverArray = [
+        {
+            "titleH" : "나의 브랜드로 \n만드는 기회",
+            "titleP" : "나를 브랜딩하고, \n새로운 프로젝트를 발견하세요.",
+            "imgUrl" : "/static-images/landing-main-sample.jpg", 
+        },{
+            "titleH" : "나의 브랜드로 \n만드는 기회2",
+            "titleP" : "나를 브랜딩하고, \n새로운 프로젝트를 발견하세요.2",
+            "imgUrl" : "/static-images/landing-main-sample.jpg", 
+        }
+    ]
+
 </script>
 
 <div class="cover-wrapper">

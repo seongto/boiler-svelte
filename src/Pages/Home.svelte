@@ -22,7 +22,7 @@
     <CoverSection imgWidth={imgWidth} />
 </div>
 <div class="sections">
-    <BrandStorySection cardWidth={cardWidth}>
+    <BrandStorySection>
         <h2 class="section-title">나만의 브랜드를 만들어가는 사람들을 만나보세요.</h2>
     </BrandStorySection>
 </div>

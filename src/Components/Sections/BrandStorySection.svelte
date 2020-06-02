@@ -5,33 +5,37 @@
     let brStroies = [
         {
             "name" : "박진규",
-            "title" : "성장중人 비즈니스 디벨로퍼",
-            "description" : "외부 환경에 나의 시간을 맡기지 않고, 스스로 미래를 만드는 삶을 사는 중입니다. 금융, 컨설팅, 전략 업무와 유니콘 스타트업에 대한 Case Study 콘텐츠를 쌓으면서 얻은 인사이트를 비즈니스로 풀어냅니다.",
-            "link" : "https://blog.allius.io",
+            "title" : "발 빠르게 움직이는\n비즈니스 디벨로퍼",
+            "description" : "금융, 컨설팅, 전략에 자신 있습니다. 유니콘 스타트업 Case Study를 운영하며 얻은 인사이트를 곧바로 비즈니스로 연결합니다.",
+            "link" : "https://allius.io/@david",
         },{
             "name" : "최보미",
-            "title" : "잘 들리게 포장합니다",
-            "description" : "잘 전달하기 위해 벗기기도 하고, 입히기도 하고, 뜯어보기도 하고, 해체하기도 합니다. 포장이라 했지만, 실은 언박싱 전문인 듯 합니다. 목넘김이 좋은 글을 씁니다.",
-            "link" : "https://blog.allius.io",
+            "title" : "잘 넘어가도록\n포장합니다",
+            "description" : "잘 전달하기 위해 벗기기도 하고, 입히기도 하고, 뜯어도 봅니다. 포장이라 했지만 실은 언박싱 전문인 듯 합니다. 목넘김이 좋은 글을 씁니다.",
+            "link" : "https://allius.io/@bom",
         },{
             "name" : "장정은",
-            "title" : "스타트업 해결사",
-            "description" : "스타트업이 성장하는 과정에서 직면하는 다양한 리스크를 관리하여 안전하게 성장할 수 있도록 합니다. 스타트업의 성장을 막는 불필요하고 불합리한 규제를 개선하고 제도를 만들어가고 싶습니다.",
-            "link" : "https://blog.allius.io",
+            "title" : "떼인 꿈 받아드리는\n스타트업 해결사",
+            "description" : "스타트업이 성장하는 과정에서 직면하는 다양한 리스크를 관리합니다. 불필요하고 불합리한 규제를 개선하고 제도를 만들어가고자 합니다.",
+            "link" : "https://allius.io/@sophia",
         },{
             "name" : "오하니",
-            "title" : "향수 읽어주는 여자",
-            "description" : "\"왜 우리들에게 편안한 향은 없을까?\" 향기는 기억과 감정의 영향을 받습니다. 한국의 문화와 한국인의 감성으로 한국의 향을 만들고 세계에 한국을 이야기하고 싶습니다.",
-            "link" : "https://blog.allius.io",
+            "title" : "향수\n읽어주는 여자",
+            "description" : "향기는 우리의 기억과 감정에 영향을 미칩니다. 한국의 문화와 한국인의 감성으로 향을 만들고, 세계에 한국을 이야기하고 싶습니다.",
+            "link" : "https://allius.io/@nalda",
         },{
             "name" : "신재욱",
-            "title" : "시험을 당하는 자",
-            "description" : "배움을 갈구하고 성장을 목표로 합니다. 스타트업을 하며 끊임없이 마주하는 모험과 시험을 잘 이겨내고 싶습니다.",
-            "link" : "https://blog.allius.io",
+            "title" : "모험을 즐기는\n공유 오피스 탐험가",
+            "description" : "'함께 일하는 공간'이 궁금합니다. 스타트업을 운영하며 방문하는 다양한 공유 오피스들의 특색을 파악해 글로 남깁니다.",
+            "link" : "https://allius.io/@jacob",
         },
     ];
 
-    export let cardWidth = 200;
+    let brandStoryList;
+    let scrollWidth;
+    let scrollX; 
+    let boxWidth;
+    $: handleScroll(scrollX);  
 
     const mixArray = (a, b) => {  
         return 0.5 - Math.random();
@@ -41,24 +45,39 @@
         window.open(target);
     }
 
+    const handleScroll = (x) => {
+        if (x){
+            brandStoryList.scrollTo(x, 0);
+        } else if ( x === 0){
+            brandStoryList.scrollTo(x, 0);
+        }
+    }
+
+    const handleScrollX = () => {
+        scrollX = brandStoryList.scrollLeft;
+    }
+
     onMount(() => {
         brStroies = brStroies.sort(mixArray);
+        scrollX = 0;
     });
 
 </script>
 
 <div class="brand-story-wrapper">
     <slot></slot>
-    <ul>
+    <ul bind:this={brandStoryList} bind:clientWidth={scrollWidth} on:scroll={() => handleScrollX()}> 
         {#each brStroies as item}
-            <li on:click={() => clickToLink(item["link"])} style="width:{cardWidth}px; height:{cardWidth}px;">
+            <li bind:clientWidth={boxWidth} on:click={() => clickToLink(item["link"])}>
                 <span>{item["name"]}</span>
-                <h3>{item["title"]}</h3>
+                <textarea disabled readonly rows="2">{item["title"]}</textarea>
                 <p>{item["description"]}</p>
             </li>
         {/each}
     </ul>
+    <input type="range" bind:value={scrollX} max={(boxWidth*5)-scrollWidth+80} >
 </div>
+
 
 <style lang="scss">
     @import '../../assets/scss/common.scss';
@@ -69,7 +88,7 @@
         ul {
             width: auto;
             margin-top: 30px;
-            overflow-x : auto;
+            overflow-x: scroll;
             display: flex;
             flex-wrap: nowrap;
 
@@ -78,16 +97,20 @@
             }
 
             li {
+                width: 280px;
+                height: 280px;
                 flex: 0 0 auto;
                 display: block;
                 border : 1px solid black;
                 border-radius : 8px;
                 padding: 20px;
-                height: 240px;
                 margin-right: 15px;
                 overflow: hidden;
-                min-width: 240px; 
-                min-height: 240px;
+
+                @include respond-to('w600') {
+                    width: 240px;
+                    height: 240px;
+                }
 
                 &:hover {
                     cursor: pointer;
@@ -101,17 +124,135 @@
                     font-size: 0.6em;
                     color: $theme-color1;
                     display: block;
+                    margin-bottom: 3px;
                 }
 
-                h3 {
-                    font-size: 1em;
-                    margin-bottom: 5px;
+                textarea {
+                    font-size: 1.2em;
+                    line-height: 1.3em;
+                    font-weight: 700;
+                    border: none;
+                    color: black;
+                    resize: none;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
                 }
 
                 p{
+                    margin-top: 5px;
                     font-size: 0.7em;
                 }
             }
+        }
+        
+        input[type=range] {
+            display: block;
+            margin-top: 22px;
+            width: 300px;
+
+            @include respond-to('w600') {
+                display: none;
+            }
+
+            //기존 디자인 숨기기
+            -webkit-appearance: none; 
+            width: 100%;
+            background: transparent;
+
+            &::-webkit-slider-thumb {
+                -webkit-appearance: none;
+            }
+            
+            &:focus {
+                outline: none;
+            }
+
+            &::-ms-track {
+                width: 100%;
+                cursor: pointer;
+
+                background: transparent; 
+                border-color: transparent;
+                color: transparent;
+            }
+
+            // thumb 수정
+            &::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                height: 24px;
+                width: 8px;
+                border-radius: 5px;
+                background: lighten($theme-color1, 20%);
+                cursor: pointer;
+                margin-top: -9px;
+            }
+
+            &::-moz-range-thumb {
+                height: 24px;
+                width: 8px;
+                border-radius: 5px;
+                background: lighten($theme-color1, 20%);
+                cursor: pointer;
+            }
+
+            &::-ms-thumb {
+                height: 24px;
+                width: 8px;
+                border-radius: 5px;
+                background: lighten($theme-color1, 20%);
+                cursor: pointer;
+            }
+
+            // track 수정
+            &::-webkit-slider-runnable-track {
+                width: 100%;
+                height: 4px;
+                cursor: pointer;
+                background: #f3f3f3;
+                border-radius: 2px;
+            }
+
+            &:focus::-webkit-slider-runnable-track {
+                background: #f3f3f3;
+            }
+
+            &::-moz-range-track {
+                width: 100%;
+                height: 4px;
+                cursor: pointer;
+                background: #f3f3f3;
+                border-radius: 2px;
+            }
+
+            &::-ms-track {
+                width: 100%;
+                height: 4px;
+                cursor: pointer;
+                background: transparent;
+                border-color: transparent;
+                color: transparent;
+            }
+
+            &::-ms-fill-lower {
+                background: #f3f3f3;
+                border-radius: 2px;
+            }
+
+            &:focus::-ms-fill-lower {
+                background: #f3f3f3;
+            }
+
+            &::-ms-fill-upper {
+                background: #f3f3f3;
+                border-radius: 2px;
+            }
+
+            &:focus::-ms-fill-upper {
+                background: #f3f3f3;
+            }
+
         }
     }
 
