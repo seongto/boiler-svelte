@@ -138,6 +138,10 @@
                     &:hover {
                         cursor: pointer;
                     }
+
+                    &::placeholder {
+                        color: black;
+                    }
                 }
 
                 p{
