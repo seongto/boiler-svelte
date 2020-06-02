@@ -204,7 +204,7 @@
 
                         .event-status {
                             font-size: 0.6em;
-                            font-weight: 300;
+                            font-weight: 400;
                             line-height: 1em;
                             margin-top: 0;
                             margin-bottom: 5px;

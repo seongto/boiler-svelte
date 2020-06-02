@@ -114,6 +114,7 @@
                     height: 150px;
                     font-size : 1em;
                     color: $theme-color1;
+                    
 
                     @include respond-to('w400') {
                         width: 100%;
@@ -122,6 +123,8 @@
                 }
 
                 a.not-opened {
+                    line-height: 1.1em;
+
                     span {
                         color : lighten($theme-color1, 30%);
                         font-size: 0.8em;
@@ -129,6 +132,7 @@
                         &.coming {
                             display: block;
                             color: $theme-color1;
+                            margin: 5px 0;
                         }
                     }
                 }
