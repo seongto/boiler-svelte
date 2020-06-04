@@ -17,7 +17,6 @@
 
 </script>
 
-<Meta />
 <Header />
 <div class="sections cover">
     <CoverSection imgWidth={imgWidth} />
