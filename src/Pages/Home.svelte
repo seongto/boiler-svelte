@@ -7,6 +7,7 @@
     import CommunityActivitySection from '../Components/Sections/CommunityActivitySection.svelte';
     import Header from '../Components/Header.svelte';
     import Footer from '../Components/Footer.svelte';
+    import Meta from '../Components/Meta.svelte';
 
 
     let winWidth = window.innerWidth;
@@ -16,6 +17,7 @@
 
 </script>
 
+<Meta />
 <Header />
 <div class="sections cover">
     <CoverSection imgWidth={imgWidth} />
