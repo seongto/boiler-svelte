@@ -26,10 +26,10 @@
     <meta property="og:description" content='나의 브랜드로 만드는 기회' />
     <meta property="twitter:description" content='나의 브랜드로 만드는 기회' />
 
-    <meta property="og:image" content=`${constants.IMG_URL}/static-images/meta_img_01.jpg` />
+    <meta property="og:image" content="{constants.IMG_URL}/static-images/meta_img_01.jpg" />
     <meta
     property="twitter:image"
-    content=`${constants.IMG_URL}/static-images/meta_img_01.jpg`
+    content="{constants.IMG_URL}/static-images/meta_img_01.jpg"
     />
 
     <meta property="og:image:alt" content='나의 브랜드로 만드는 기회' />
