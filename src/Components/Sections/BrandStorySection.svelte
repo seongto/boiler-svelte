@@ -3,6 +3,11 @@
     import { onMount }      from 'svelte';
     import TextBox          from '../TextBox.svelte';
 
+    const mixArray = (a, b) => {  
+        return 0.5 - Math.random();
+    } 
+
+
     let brStroies = [
         {
             "name" : "박진규",
@@ -30,17 +35,13 @@
             "description" : "'함께 일하는 공간'이 궁금합니다. 스타트업을 운영하며 방문하는 다양한 공유 오피스들의 특색을 파악해 글로 남깁니다.",
             "link" : "https://allius.io/@jacob",
         },
-    ];
+    ].sort(mixArray);
 
     let brandStoryList;
     let scrollWidth;
     let scrollX; 
     let boxWidth;
     $: handleScroll(scrollX);  
-
-    const mixArray = (a, b) => {  
-        return 0.5 - Math.random();
-    } 
 
     function clickToLink(target) {
         window.open(target);
@@ -59,14 +60,12 @@
     }
 
     onMount(() => {
-        brStroies = brStroies.sort(mixArray);
         scrollX = 0;
     });
 
 </script>
 
 <div class="brand-story-wrapper">
-    <slot></slot>
     <ul bind:this={brandStoryList} bind:clientWidth={scrollWidth} on:scroll={() => handleScrollX()}> 
         {#each brStroies as item}
             <li bind:clientWidth={boxWidth} on:click={() => clickToLink(item["link"])}>
