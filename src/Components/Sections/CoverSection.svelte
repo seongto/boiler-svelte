@@ -97,13 +97,13 @@
         }
 
         img {
-            border-radius: 8px;
+            border-radius: 4px;
 
             @include respond-to('w600') {
                 margin-top: 20px;
                 width: 100%;
                 height: 100%;
-                border-radius: 4px;
+                border-radius: 3px;
             }
         }
     }

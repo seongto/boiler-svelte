@@ -8,6 +8,7 @@
     import CommunityActivitySection from '../Components/Sections/CommunityActivitySection.svelte';
     import Header from '../Components/Header.svelte';
     import Footer from '../Components/Footer.svelte';
+    import Meta from '../Components/Meta.svelte';
 
 
     let winWidth = window.innerWidth;
@@ -17,6 +18,7 @@
 
 </script>
 
+<Meta />
 <Header />
 <div class="sections cover">
     <CoverSection imgWidth={imgWidth} />
@@ -26,12 +28,6 @@
         <h2 class="section-title">나만의 브랜드를 만들어가는 사람들을 만나보세요.</h2>
     </BrandStorySection>
 </div>
-<!-- <div class="sections">
-    <WhyAlliusSection boxPadding={boxPadding}>
-        <h2 class="section-title">why allius</h2>
-        <p class="section-description">당신이 얼라이어스를 사용해야 하는 이유</p>
-    </WhyAlliusSection>
-</div> -->
 <div class="sections">
     <TutorialSection imgWidth={imgWidth}>
         <h2 class="section-title">처음 오셨나요?</h2>

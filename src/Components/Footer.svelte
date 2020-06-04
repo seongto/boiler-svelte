@@ -1,5 +1,5 @@
 <script>
-
+    import { Router, Link, Route } from "svelte-routing";
 </script>
 
 <div class="footer">
@@ -10,6 +10,7 @@
         문의 : allius@realwesen.com<br>
         © realwesen, Inc. All Rights Reserved.
     </p>
+    <Link to="terms">LINK</Link>
 </div>
 
 <style lang="scss">
