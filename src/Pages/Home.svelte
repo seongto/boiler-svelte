@@ -1,6 +1,5 @@
 <script>
     import * as constants from '../assets/js/constants.js';
-    import { onMount } from 'svelte';
 
     import BrandStorySection from '../Components/Sections/BrandStorySection.svelte';
     import CoverSection from '../Components/Sections/CoverSection.svelte';

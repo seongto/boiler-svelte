@@ -7,10 +7,13 @@
     <p class="company-info">
         사업자 등록 번호 : 152-81-00668<br>
         주소 : 서울 강남구 학동로 343, B2 청년창업센터 2호<br>
-        문의 : allius@realwesen.com<br>
-        © realwesen, Inc. All Rights Reserved.
+        문의 : allius@realwesen.com<br><br>
+        <strong>© realwesen, Inc. All Rights Reserved.</strong>
     </p>
-    <Link to="terms">LINK</Link>
+    <div class="link-box">
+        <Link to="terms"><div class="link-to">Terms</div></Link>
+        <Link to="privacy"><div class="link-to">Privacy</div></Link>
+    </div>
 </div>
 
 <style lang="scss">
@@ -35,7 +38,19 @@
         }
 
         .company-info {
+            margin-top: 10px;
             font-size: 0.8em;
+        }
+
+        .link-box {
+
+            .link-to {
+                text-decoration: none;
+                font-size: 0.8em;
+                color: $theme-color1;
+                display: inline-block;
+                margin-right: 20px;
+            }
         }
     }
 

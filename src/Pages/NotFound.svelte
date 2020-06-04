@@ -31,9 +31,10 @@
         word-break: keep-all;;
 
         h1 {
-            padding-top: 50px;
+            padding: 80px 0;
             font-size: 100px;
             margin: 0 auto;
+            
         }
     }
 </style>

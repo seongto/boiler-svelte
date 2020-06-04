@@ -5,7 +5,7 @@
     import Header   from '../Components/Header.svelte';
     import Footer   from '../Components/Footer.svelte';
     import Meta     from '../Components/Meta.svelte';
-    import Terms    from '../Components/Terms.svelte';
+    import Privacy  from '../Components/Privacy.svelte';
 
     let scrollY;
 
@@ -19,7 +19,7 @@
 <Meta />
 <Header />
 <div class="sections">
-    <Terms />
+    <Privacy />
 </div>
 <Footer />
 

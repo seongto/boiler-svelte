@@ -395,20 +395,34 @@
     @import '../assets/scss/common.scss';
 
     .title {
-        font-family: $font-kr;
-        font-size: 1.5em;
+        font-size: 1.6em;
+    }
+
+    .document-date {
+        font-size: 0.8em;
+        margin: 20px 0;
     }
 
     .section-title {
-        font-family: $font-kr;
-        font-size: 1.2em;
+        font-size: 1em;
+        margin-top: 30px;
     }
 
     .section-description {
-        font-family: $font-kr;
-        font-size: 1em;
+        font-size: 0.9em;
+        margin-top: 10px;
+        line-height: 1.8em;
 
         .list01 {
+            font-size: 0.9em;
+            padding-left: 50px;
+            margin: 8px 0 16px;
+            line-height: 2em;
+            color: #2e2e2e;
+
+            @include respond-to('w600') {
+                padding-left: 20px;
+            }
 
         }
     }

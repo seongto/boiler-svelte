@@ -1,10 +1,10 @@
 <script>
-
+    import { Router, Link, Route } from "svelte-routing"
 </script>
 
 <div class="header">
     <div class="header-wrapper">
-        <a href="https://home.allius.io" class="logo">allius</a>
+        <Link to="/"><div class="logo">allius</div></Link>
         <ul>
             <li>
                 <a href="https://allius.io/desk" target="_blank">Login</a>
