@@ -66,6 +66,7 @@
 </script>
 
 <div class="brand-story-wrapper">
+    <slot></slot>
     <ul bind:this={brandStoryList} bind:clientWidth={scrollWidth} on:scroll={() => handleScrollX()}> 
         {#each brStroies as item}
             <li bind:clientWidth={boxWidth} on:click={() => clickToLink(item["link"])}>
