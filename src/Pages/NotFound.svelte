@@ -9,7 +9,6 @@
 
 </script>
 
-<Meta />
 <Header />
 <div class="wrapper">
     <h1>

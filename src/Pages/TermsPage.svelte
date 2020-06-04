@@ -16,30 +16,6 @@
 
 </script>
 
-<svelte:head>
-    <title>'allius'</title>
-    <meta name="title" content='allius' />
-    <meta property="og:title" content='allius' />
-    <meta property="twitter:title" content='allius' />
-
-    <meta name="description" content='나의 브랜드로 만드는 기회' />
-    <meta property="og:description" content='나의 브랜드로 만드는 기회' />
-    <meta property="twitter:description" content='나의 브랜드로 만드는 기회' />
-
-    <meta property="og:image" content="{constants.IMG_URL}/static-images/meta_img_01.jpg" />
-    <meta
-    property="twitter:image"
-    content="{constants.IMG_URL}/static-images/meta_img_01.jpg"
-    />
-
-    <meta property="og:image:alt" content='나의 브랜드로 만드는 기회' />
-    <meta property="twitter:image:alt" content='나의 브랜드로 만드는 기회' />
-
-    <meta property="og:url" content='https://home.allius.io'/>
-    <meta property="twitter:url" content='https://home.allius.io' />
-
-    <meta property="og:type" content="website" />
-</svelte:head>
 
 <Header />
 <div class="sections">
