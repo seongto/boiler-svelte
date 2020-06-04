@@ -313,6 +313,7 @@
                 background: lighten($theme-color1, 20%);
                 cursor: pointer;
                 margin-top: -9px;
+                border: none;
             }
 
             &::-moz-range-thumb {
@@ -321,6 +322,7 @@
                 border-radius: 5px;
                 background: lighten($theme-color1, 20%);
                 cursor: pointer;
+                border: none;
             }
 
             &::-ms-thumb {
@@ -329,6 +331,7 @@
                 border-radius: 5px;
                 background: lighten($theme-color1, 20%);
                 cursor: pointer;
+                border: none;
             }
 
             // track 수정

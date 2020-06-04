@@ -11,7 +11,7 @@
 
 
     let winWidth = window.innerWidth;
-    $: imgWidth = (winWidth > 1000) ? 400 : winWidth*0.4;
+    $: imgWidth = (winWidth > 1000) ? 440 : winWidth*0.44;
     $: cardWidth = (winWidth > 1000) ? 280 : winWidth*0.3;
     $: boxPadding = (winWidth > 1000) ? 30 : 0 ;
 

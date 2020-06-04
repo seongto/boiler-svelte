@@ -1,6 +1,7 @@
 <script>
-    import * as constants from '../../assets/js/constants.js';
-    import { onMount } from 'svelte';
+    import * as constants   from '../../assets/js/constants.js';
+    import { onMount }      from 'svelte';
+    import TextBox          from '../TextBox.svelte';
 
     let brStroies = [
         {
@@ -70,7 +71,11 @@
         {#each brStroies as item}
             <li bind:clientWidth={boxWidth} on:click={() => clickToLink(item["link"])}>
                 <span>{item["name"]}</span>
-                <textarea style="color:black;" readonly rows="2">{item["title"]}</textarea>
+                <TextBox
+                    tagType="h3"
+                    className="br-title"
+                    context={item["title"]}
+                />
                 <p>{item["description"]}</p>
             </li>
         {/each}
@@ -127,16 +132,12 @@
                     margin-bottom: 3px;
                 }
 
-                textarea {
+                :global(h3.br-title) {
                     display: block;
-                    font-size: 1.2em;
-                    line-height: 1.3em;
+                    font-size: 1.1em;
+                    line-height: 1.2em;
                     font-weight: 700;
-                    border: none;
                     color: black;
-                    resize: none;
-                    background-color: none;
-                    text-rendering: unset;
 
                     &:hover {
                         cursor: pointer;
@@ -147,8 +148,8 @@
                     }
                 }
 
-                p{
-                    margin-top: 5px;
+                p {
+                    margin-top: 8px;
                     font-size: 0.7em;
                 }
             }
@@ -194,6 +195,7 @@
                 background: lighten($theme-color1, 20%);
                 cursor: pointer;
                 margin-top: -9px;
+                border: none;
             }
 
             &::-moz-range-thumb {
@@ -202,6 +204,7 @@
                 border-radius: 5px;
                 background: lighten($theme-color1, 20%);
                 cursor: pointer;
+                border: none;
             }
 
             &::-ms-thumb {
@@ -210,6 +213,7 @@
                 border-radius: 5px;
                 background: lighten($theme-color1, 20%);
                 cursor: pointer;
+                border: none;
             }
 
             // track 수정
