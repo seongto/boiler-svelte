@@ -28,9 +28,6 @@
     <meta property="og:image:alt" content={metadata.imageAlt} />
     <meta property="twitter:image:alt" content={metadata.imageAlt} />
 
-    <meta property="og:url" content={metadata.url} />
-    <meta property="twitter:url" content={metadata.url} />
-
     <meta property="og:type" content="website" />
 
 </svelte:head>
