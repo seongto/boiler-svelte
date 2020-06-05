@@ -1,7 +1,7 @@
 <script>
     import * as constants   from '../../assets/js/constants.js';
     import { onMount, onDestroy }      from 'svelte';
-    import { fly }   from 'svelte/transition';
+    import { fly }          from 'svelte/transition';
     import TextBox          from '../TextBox.svelte';
     import Seperator        from '../Seperator.svelte';
 
@@ -50,7 +50,7 @@
                     context={item["titleThin"]} 
                 />
             </div>
-            <img alt="cover-image" width={imgWidth} height={imgWidth} src="{constants.IMG_URL}{item["imgUrl"]}" in:fly="{{ duration:2400, x:12, opacity:0.7}}">
+            <img alt="cover-image" width={imgWidth} height={imgWidth} src="{constants.IMG_URL}{item["imgUrl"]}" in:fly="{{ duration:2400, x:12, opacity:0.7}}"/>
         {/if}
     {/each}
 </div>

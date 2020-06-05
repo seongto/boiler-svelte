@@ -63,7 +63,7 @@
                     <span>{item["text"]}</span>
                 </a>
             {:else}
-                <a class="not-opened">
+                <a href="javascript:void(0);" class="not-opened">
                     <p>0{index+1}</p>
                     <span class="coming">coming soon</span>
                     <span>{item["text"]}</span>
