@@ -1,7 +1,7 @@
 module.exports = {
   apps : [{
     name: 'allius-svelte',
-    script: 'npm run start-web',
+    script: 'npm run start-public',
     watch: true,
     env: {
       NODE_ENV: "development",

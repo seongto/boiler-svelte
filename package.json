@@ -5,7 +5,8 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --single",
-    "start-web": "sirv public --single --host 0.0.0.0 --port 3000"
+    "start-web": "sirv public --single --host 0.0.0.0 --port 3000",
+    "start-public": "sirv public --single --host 0.0.0.0 --port 80"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "11.0.2",
