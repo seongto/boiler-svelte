@@ -4,7 +4,7 @@
     import BrandStorySection from '../Components/Sections/BrandStorySection.svelte';
     import CoverSection from '../Components/Sections/CoverSection.svelte';
     import TutorialSection from '../Components/Sections/TutorialSection.svelte';
-    import CommunityActivitySection from '../Components/Sections/CommunityActivitySection.svelte';
+    import CommunityEventsSection from '../Components/Sections/CommunityEventsSection.svelte';
     import Header from '../Components/Header.svelte';
     import Footer from '../Components/Footer.svelte';
     import Meta from '../Components/Meta.svelte';
@@ -33,10 +33,10 @@
     </TutorialSection>
 </div>
 <div class="sections">
-    <CommunityActivitySection>
+    <CommunityEventsSection>
         <h2 class="section-title">Community Activity</h2>
         <p class="section-description">allius 커뮤니티 활동에 참여하세요.</p>
-    </CommunityActivitySection>
+    </CommunityEventsSection>
 </div>
 <Footer />
 

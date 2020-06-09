@@ -2,46 +2,46 @@
     import * as constants from '../../assets/js/constants.js';
     import { onMount } from 'svelte';
 
-    let communityDone = [
+    let finishedEvents = [
         {
-            "title": "내. 동년배들. 다. 커리어로. 콘텐츠 만든다.",
-            "link": "https://www.instagram.com/p/B8swwiAnNkf/",
+            "event_title": "내. 동년배들. 다. 커리어로. 콘텐츠 만든다.",
+            "link_to": "https://www.instagram.com/p/B8swwiAnNkf/",
             "date": "2020-02-07",
         },{
-            "title": "읽고해봐: 생각하는 힘은 유일한 무기가 된다",
-            "link": "https://www.instagram.com/p/B9oJq6DnfqO/",
+            "event_title": "읽고해봐: 생각하는 힘은 유일한 무기가 된다",
+            "link_to": "https://www.instagram.com/p/B9oJq6DnfqO/",
             "date": "2020-02-14",
         },{
-            "title": "읽고해봐 온라인: 울트라러닝",
-            "link": "https://www.instagram.com/p/B-LmxZvnEDC/",
+            "event_title": "읽고해봐 온라인: 울트라러닝",
+            "link_to": "https://www.instagram.com/p/B-LmxZvnEDC/",
             "date": "2020-03-21",
         },{
-            "title": "프로젝트 플러스원: 22일 습관 만들기",
-            "link": "https://www.instagram.com/p/B_t1Shnn2Vp/",
+            "event_title": "프로젝트 플러스원: 22일 습관 만들기",
+            "link_to": "https://www.instagram.com/p/B_t1Shnn2Vp/",
             "date": "2020-04-09",
         },{
-            "title": "유니콘 스타트업 케이스 스터디",
-            "link": "",
+            "event_title": "유니콘 스타트업 케이스 스터디",
+            "link_to": "",
             "date": "2020-05-20",
         },
     ]
 
-    let communityPlanned = [
+    let upcomingEvents = [
         {
-            "title": "프로젝트 플러스원: 22일 습관 만들기",
-            "link": "https://www.notion.so/realwesen/6-5e8cdb0385d642c1b3c8348a0581a7f2",
+            "event_title": "프로젝트 플러스원: 22일 습관 만들기",
+            "link_to": "https://www.notion.so/realwesen/6-5e8cdb0385d642c1b3c8348a0581a7f2",
             "date": "2020-06-09",
         },{
-            "title": "유니콘 스타트업 케이스 스터디",
-            "link": "https://www.notion.so/realwesen/Startup-Mini-MBA_Unicorn-Startup-Case-Study-a18005598aaa419cae48fc093e15c665",
+            "event_title": "유니콘 스타트업 케이스 스터디",
+            "link_to": "https://www.notion.so/realwesen/Startup-Mini-MBA_Unicorn-Startup-Case-Study-a18005598aaa419cae48fc093e15c665",
             "date": "2020-06-17",
         },{
-            "title": "읽고해봐: 빅 워크",
-            "link": "https://www.notion.so/realwesen/6-109f69cb185040d0976bf4b4c2f94f0f",
+            "event_title": "읽고해봐: 빅 워크",
+            "link_to": "https://www.notion.so/realwesen/6-109f69cb185040d0976bf4b4c2f94f0f",
             "date": "2020-06-20",
         },{
-            "title": "프로젝트 정리 워크샵 : 야생에서 살아남는 나의 능력 발견!",
-            "link": "https://www.notion.so/realwesen/c3e554f239b54442b89679d08a755786",
+            "event_title": "프로젝트 정리 워크샵 : 야생에서 살아남는 나의 능력 발견!",
+            "link_to": "https://www.notion.so/realwesen/c3e554f239b54442b89679d08a755786",
             "date": "2020-06-23",
         }
     ]
@@ -49,19 +49,19 @@
     let communityMessages = [
         {
             "text": "프로젝트로 만난 사이",
-            "link": "https://blog.allius.io",
+            "link_to": "https://blog.allius.io",
         },{
             "text": "내 브랜드, 니 브랜드, 우리 프로젝트",
-            "link": "https://blog.allius.io",
+            "link_to": "https://blog.allius.io",
         },{
             "text": "프로젝트로 만든 브랜드",
-            "link": "https://blog.allius.io",
+            "link_to": "https://blog.allius.io",
         },{
             "text": "처음 뵙겠습니다",
-            "link": "https://blog.allius.io",
+            "link_to": "https://blog.allius.io",
         },{
             "text": "나의 경험이 브랜드가 되는 얼라이어스",
-            "link": "https://blog.allius.io",
+            "link_to": "https://blog.allius.io",
         },
     ]
 
@@ -94,54 +94,54 @@
     });
 </script>
 
-<div class="community-event-wrapper">
+<div class="community-events-wrapper">
     <slot></slot>
     <ul bind:this={communityEventList} bind:clientWidth={scrollWidth} on:scroll={() => handleScrollX()}>
-        {#each communityDone as item}
-            {#if !item["link"]}
-            <li class="c-done">
-                <a href="javascript:void(0);" class="cme-box">
-                    <p><span class="event-status">we did</span>{item["title"]}</p>
+        {#each finishedEvents as item}
+            {#if !item["link_to"]}
+            <li class="events-done">
+                <a href="javascript:void(0);" class="event-box">
+                    <p><span class="event-status">we did</span>{item["event_title"]}</p>
                     <span class="event-date">{item["date"]}</span>
                 </a>
             </li>
             {:else}
-            <li class="c-done">
-                <a href={item["link"]} target="_blank" class="cme-box">
-                    <p><span class="event-status">we did</span>{item["title"]}</p>
+            <li class="events-done">
+                <a href={item["link_to"]} target="_blank" class="event-box">
+                    <p><span class="event-status">we did</span>{item["event_title"]}</p>
                     <span class="event-date">{item["date"]}</span>
                 </a>
             </li>
             {/if}
         {/each}
-        <li class="c-main" bind:clientWidth={boxWidth}>
-            <div class="cme-box">
-                <span class="arrow-left">swipe left. 지난 이벤트</span>
-                <p>allius 커뮤니티 이벤트에 함께하세요.</p>
-                <span class="arrow-right">swipe right. 예정된 이벤트</span>
-            </div>
-        </li>
-        {#each communityPlanned as item}
-            {#if !item["link"]}
-            <li class="c-planned" >
-                <a href="javascript:void(0);" class="cme-box">
-                    <p><span class="event-status">upcoming</span>{item["title"]}</p>
+            <li class="events-main" bind:clientWidth={boxWidth}>
+                <div class="event-box">
+                    <span class="arrow-left">swipe left. 지난 이벤트</span>
+                    <p>allius 커뮤니티 이벤트에 함께하세요.</p>
+                    <span class="arrow-right">swipe right. 예정된 이벤트</span>
+                </div>
+            </li>
+        {#each upcomingEvents as item}
+            {#if !item["link_to"]}
+            <li class="events-upcoming" >
+                <a href="javascript:void(0);" class="event-box">
+                    <p><span class="event-status">upcoming</span>{item["event_title"]}</p>
                     <span class="event-date">{item["date"]}</span>
                 </a>
             </li>
             {:else}
-            <li class="c-planned">
-                <a href={item["link"]} target="_blank" class="cme-box">
-                    <p><span class="event-status">upcoming</span>{item["title"]}</p>
+            <li class="events-upcoming">
+                <a href={item["link_to"]} target="_blank" class="event-box">
+                    <p><span class="event-status">upcoming</span>{item["event_title"]}</p>
                     <span class="event-date">{item["date"]}</span>
                 </a>
             </li>
             {/if}
         {/each}
         {#each communityMessages as item, idx}
-            {#if idx < (5-communityPlanned.length)}
-                <li class="c-msg">
-                    <a href="javascript:void(0);" class="cme-box">{item["text"]}</a>
+            {#if idx < (5-upcomingEvents.length)}
+                <li class="community-msg">
+                    <a href="javascript:void(0);" class="event-box">{item["text"]}</a>
                 </li>
             {/if}
         {/each}
@@ -152,7 +152,7 @@
 <style lang="scss">
     @import '../../assets/scss/common.scss';
 
-    .community-event-wrapper {
+    .community-events-wrapper {
 
         ul {
             display: flex;
@@ -180,7 +180,7 @@
                     margin-right: 0;
                 }
 
-                .cme-box {
+                .event-box {
                     display: flex;
                     width: 240px;
                     height: 240px;
@@ -225,11 +225,11 @@
                 }
             }
 
-            li.c-main {
+            li.events-main {
                 padding: 5px;
                 background-color: $sub-color1;
 
-                .cme-box {
+                .event-box {
                     width: 230px;
                     height: 230px;
                     display: flex;
@@ -254,15 +254,15 @@
                 }
             }
 
-            li.c-planned {
-                .cme-box {
+            li.events-upcoming {
+                .event-box {
                     background-color: $theme-color1;
                     color: $sub-color2;
                 }
             }
 
-            li.c-msg {
-                .cme-box {
+            li.community-msg {
+                .event-box {
                     font-weight: 700;
                     font-size: 1.5em;
                     background-color: $sub-color2;

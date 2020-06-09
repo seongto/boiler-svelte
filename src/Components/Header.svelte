@@ -1,14 +1,36 @@
 <script>
     import { Router, Link, Route } from "svelte-routing"
+    import { onMount }      from 'svelte'
+
+    let loginCheck;
+
+    const getCookie = (key) => {
+        let value = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+        return value? value[2] : null;
+    };
+
+
+출처: https://thereclub.tistory.com/59 [강남부자]
+
+    onMount(() => {
+        loginCheck = Boolean(getCookie('allius_id'));
+        console.log(loginCheck);
+    });
 </script>
 
 <div class="header">
     <div class="header-wrapper">
         <Link to="/"><div class="logo">allius</div></Link>
         <ul>
-            <li>
-                <a href="https://allius.io/desk" target="_blank">Login</a>
-            </li>
+            {#if loginCheck}
+                <li>
+                    <a href="https://allius.io/desk" target="_blank">Studio</a>
+                </li>
+            {:else}
+                <li>
+                    <a href="https://allius.io/login" target="_blank">Login</a>
+                </li>
+            {/if}
         </ul>
     </div>
 </div>
