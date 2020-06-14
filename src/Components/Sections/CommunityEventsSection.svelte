@@ -1,27 +1,27 @@
 <script>
     import * as constants from '../../assets/js/constants.js';
-    import { onMount } from 'svelte';
+    import { onMount, tick } from 'svelte';
 
     let finishedEvents = [
         {
             "event_title": "내. 동년배들. 다. 커리어로. 콘텐츠 만든다.",
-            "link_to": "https://www.instagram.com/p/B8swwiAnNkf/",
+            "link_url": "https://www.instagram.com/p/B8swwiAnNkf/",
             "date": "2020-02-07",
         },{
             "event_title": "읽고해봐: 생각하는 힘은 유일한 무기가 된다",
-            "link_to": "https://www.instagram.com/p/B9oJq6DnfqO/",
+            "link_url": "https://www.instagram.com/p/B9oJq6DnfqO/",
             "date": "2020-02-14",
         },{
             "event_title": "읽고해봐 온라인: 울트라러닝",
-            "link_to": "https://www.instagram.com/p/B-LmxZvnEDC/",
+            "link_url": "https://www.instagram.com/p/B-LmxZvnEDC/",
             "date": "2020-03-21",
         },{
             "event_title": "프로젝트 플러스원: 22일 습관 만들기",
-            "link_to": "https://www.instagram.com/p/B_t1Shnn2Vp/",
+            "link_url": "https://www.instagram.com/p/B_t1Shnn2Vp/",
             "date": "2020-04-09",
         },{
             "event_title": "유니콘 스타트업 케이스 스터디",
-            "link_to": "",
+            "link_url": "",
             "date": "2020-05-20",
         },
     ]
@@ -29,19 +29,19 @@
     let upcomingEvents = [
         {
             "event_title": "프로젝트 플러스원: 22일 습관 만들기",
-            "link_to": "https://www.notion.so/realwesen/6-5e8cdb0385d642c1b3c8348a0581a7f2",
+            "link_url": "https://www.notion.so/realwesen/6-5e8cdb0385d642c1b3c8348a0581a7f2",
             "date": "2020-06-09",
         },{
             "event_title": "유니콘 스타트업 케이스 스터디",
-            "link_to": "https://www.notion.so/realwesen/Startup-Mini-MBA_Unicorn-Startup-Case-Study-a18005598aaa419cae48fc093e15c665",
+            "link_url": "https://www.notion.so/realwesen/Startup-Mini-MBA_Unicorn-Startup-Case-Study-a18005598aaa419cae48fc093e15c665",
             "date": "2020-06-17",
         },{
             "event_title": "읽고해봐: 빅 워크",
-            "link_to": "https://www.notion.so/realwesen/6-109f69cb185040d0976bf4b4c2f94f0f",
+            "link_url": "https://www.notion.so/realwesen/6-109f69cb185040d0976bf4b4c2f94f0f",
             "date": "2020-06-20",
         },{
             "event_title": "프로젝트 정리 워크샵 : 야생에서 살아남는 나의 능력 발견!",
-            "link_to": "https://www.notion.so/realwesen/c3e554f239b54442b89679d08a755786",
+            "link_url": "https://www.notion.so/realwesen/c3e554f239b54442b89679d08a755786",
             "date": "2020-06-23",
         }
     ]
@@ -49,19 +49,19 @@
     let communityMessages = [
         {
             "text": "프로젝트로 만난 사이",
-            "link_to": "https://blog.allius.io",
+            "link_url": "https://blog.allius.io",
         },{
             "text": "내 브랜드, 니 브랜드, 우리 프로젝트",
-            "link_to": "https://blog.allius.io",
+            "link_url": "https://blog.allius.io",
         },{
             "text": "프로젝트로 만든 브랜드",
-            "link_to": "https://blog.allius.io",
+            "link_url": "https://blog.allius.io",
         },{
             "text": "처음 뵙겠습니다",
-            "link_to": "https://blog.allius.io",
+            "link_url": "https://blog.allius.io",
         },{
             "text": "나의 경험이 브랜드가 되는 얼라이어스",
-            "link_to": "https://blog.allius.io",
+            "link_url": "https://blog.allius.io",
         },
     ]
 
@@ -88,9 +88,11 @@
         scrollX = communityEventList.scrollLeft;
     }
 
-    onMount(() => {
+    onMount( async () => {
         communityMessages = communityMessages.sort(mixArray);
+        await tick();
         communityEventList.scrollTo((boxWidth*5.5)-(scrollWidth/2-20), 0);
+        
     });
 </script>
 
@@ -98,7 +100,7 @@
     <slot></slot>
     <ul bind:this={communityEventList} bind:clientWidth={scrollWidth} on:scroll={() => handleScrollX()}>
         {#each finishedEvents as item}
-            {#if !item["link_to"]}
+            {#if !item["link_url"]}
             <li class="events-done">
                 <a href="javascript:void(0);" class="event-box">
                     <p><span class="event-status">we did</span>{item["event_title"]}</p>
@@ -107,7 +109,7 @@
             </li>
             {:else}
             <li class="events-done">
-                <a href={item["link_to"]} target="_blank" class="event-box">
+                <a href={item["link_url"]} target="_blank" class="event-box">
                     <p><span class="event-status">we did</span>{item["event_title"]}</p>
                     <span class="event-date">{item["date"]}</span>
                 </a>
@@ -122,7 +124,7 @@
                 </div>
             </li>
         {#each upcomingEvents as item}
-            {#if !item["link_to"]}
+            {#if !item["link_url"]}
             <li class="events-upcoming" >
                 <a href="javascript:void(0);" class="event-box">
                     <p><span class="event-status">upcoming</span>{item["event_title"]}</p>
@@ -131,7 +133,7 @@
             </li>
             {:else}
             <li class="events-upcoming">
-                <a href={item["link_to"]} target="_blank" class="event-box">
+                <a href={item["link_url"]} target="_blank" class="event-box">
                     <p><span class="event-status">upcoming</span>{item["event_title"]}</p>
                     <span class="event-date">{item["date"]}</span>
                 </a>
