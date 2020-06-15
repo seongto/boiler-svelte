@@ -6,7 +6,7 @@
         {
             "text": "allius를 소개합니다",
             "finished": false,
-            "link": "https://youtube.com",
+            "link": "https://blog.allius.io/2020/01/02/work-become-contents",
             "public": true,
         },{
             "text": "프로젝트 만들기",
