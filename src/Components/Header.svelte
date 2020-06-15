@@ -9,12 +9,9 @@
         return value? value[2] : null;
     };
 
-
-출처: https://thereclub.tistory.com/59 [강남부자]
-
     onMount(() => {
         loginCheck = Boolean(getCookie('allius_id'));
-        console.log(loginCheck);
+        
     });
 </script>
 

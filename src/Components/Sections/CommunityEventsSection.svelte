@@ -28,20 +28,16 @@
 
     let upcomingEvents = [
         {
-            "event_title": "프로젝트 플러스원: 22일 습관 만들기",
-            "link_url": "https://www.notion.so/realwesen/6-5e8cdb0385d642c1b3c8348a0581a7f2",
-            "date": "2020-06-09",
-        },{
             "event_title": "유니콘 스타트업 케이스 스터디",
             "link_url": "https://www.notion.so/realwesen/Startup-Mini-MBA_Unicorn-Startup-Case-Study-a18005598aaa419cae48fc093e15c665",
             "date": "2020-06-17",
         },{
-            "event_title": "읽고해봐: 빅 워크",
+            "event_title": "읽고해봐: 신뢰이동",
             "link_url": "https://www.notion.so/realwesen/6-109f69cb185040d0976bf4b4c2f94f0f",
             "date": "2020-06-20",
         },{
-            "event_title": "프로젝트 정리 워크샵 : 야생에서 살아남는 나의 능력 발견!",
-            "link_url": "https://www.notion.so/realwesen/c3e554f239b54442b89679d08a755786",
+            "event_title": "네 안에 필살기 있다 : 나의 프로젝트로 필살기 발견하기 워크샵",
+            "link_url": "https://www.notion.so/realwesen/3a707e3c2ea64736aaaa7a2387d46228",
             "date": "2020-06-23",
         }
     ]
