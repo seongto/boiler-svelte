@@ -21,11 +21,11 @@
         <ul>
             {#if loginCheck}
                 <li>
-                    <a href="https://allius.io/desk" target="_blank">Studio</a>
+                    <a href="https://allius.io/desk" target="_self">Studio</a>
                 </li>
             {:else}
                 <li>
-                    <a href="https://allius.io/login" target="_blank">Login</a>
+                    <a href="https://allius.io/login" target="_self">Login</a>
                 </li>
             {/if}
         </ul>
