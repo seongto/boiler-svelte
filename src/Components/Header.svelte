@@ -10,6 +10,12 @@
     };
 
     onMount(() => {
+        let addrs = location.href.substring(location.protocol.length);
+
+        if ((location.protocol !== 'https:') && (addrs !== '//localhost:5000/')) {
+            location.replace(`https:${location.href.substring(location.protocol.length)}`);
+        }
+
         loginCheck = Boolean(getCookie('allius_id'));
         
     });
