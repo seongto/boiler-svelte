@@ -10,10 +10,10 @@
     };
 
     onMount(() => {
-        let addrs = location.href.substring(location.protocol.length);
+        let addrs = location.href.substring(location.protocol.length).slice(2,11);
 
         if (location.protocol !== 'https:') {
-            if ((addrs !== '//localhost:5000/') && (addrs !== '//dev0828rw.allius.io/')) {
+            if ((addrs !== 'localhost') && (addrs !== 'dev0828rw')) {
                 location.replace(`https:${location.href.substring(location.protocol.length)}`);
             }
         }

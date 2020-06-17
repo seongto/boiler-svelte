@@ -88,7 +88,6 @@
         communityMessages = communityMessages.sort(mixArray);
         await tick();
         communityEventList.scrollTo((boxWidth*5.5)-(scrollWidth/2-20), 0);
-        
     });
 </script>
 
