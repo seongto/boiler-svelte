@@ -6,22 +6,30 @@
     import Seperator        from '../Seperator.svelte';
 
     export let imgWidth;
+    export let loginCheck;
     
     let timer = 4;
     let currentIndex = 0;
     let winWidth = window.innerWidth;
     let coverList;
     let coverWidth;
+    let startInterval;
 
     let coverArray = [
         {
-            "titleBold" : "나의 브랜드로 \n만드는 기회",
-            "titleThin" : "나를 브랜딩하고, \n새로운 프로젝트를 발견하세요.",
-            "imgUrl" : "/static-images/landing-01.jpg", 
+            "title-bold" : "나의 브랜드로 \n만드는 기회",
+            "title-thin" : "나를 브랜딩하고, \n새로운 프로젝트를 발견하세요.",
+            "img-url" : "/static-images/landing-01.jpg",
+            "link-text" : "🏃💨 해보겠습니다 (클릭!)",
+            "link-url1" : "https://allius.io/desk",
+            "link-url2" : "https://allius.io/login",
         },{
-            "titleBold" : "나의 브랜드로 \n만드는 기회",
-            "titleThin" : "나를 브랜딩하고, \n새로운 프로젝트를 발견하세요.",
-            "imgUrl" : "/static-images/landing-02.jpg", 
+            "title-bold" : "나의 브랜드로 \n만드는 기회",
+            "title-thin" : "나를 브랜딩하고, \n새로운 프로젝트를 발견하세요.",
+            "img-url" : "/static-images/landing-02.jpg",
+            "link-text" : "🏃💨 해보겠습니다 (클릭!)",
+            "link-url1" : "https://allius.io/desk",
+            "link-url2" : "https://allius.io/login",
         }
     ]
     /*
@@ -44,12 +52,12 @@
     */
 
    onMount(()=>{
-       let startInterval = setInterval(()=>{
+        startInterval = setInterval(()=>{
            currentIndex++;
            if (currentIndex >= coverArray.length) {currentIndex = 0};
            
            coverList.scrollTo(currentIndex*coverWidth, 0);
-       }, 4000)
+        }, 4000)
 
    })
 
@@ -66,15 +74,21 @@
                 <TextBox 
                     tagType="h1" 
                     className="cover-title-bold" 
-                    context={item["titleBold"]} 
+                    context={item["title-bold"]} 
                 />
                 <Seperator borderWidth=0 paddingTop=6 paddingBottom=6 />
                 <TextBox
                     className="cover-title-thin"
-                    context={item["titleThin"]} 
+                    context={item["title-thin"]} 
                 />
+                <Seperator borderWidth=0 paddingTop=12 paddingBottom=12 />
+                {#if loginCheck}
+                    <a class="btn-go" href={item["link-url1"]}>{item["link-text"]}</a>  
+                {:else}
+                    <a class="btn-go" href={item["link-url2"]}>{item["link-text"]}</a> 
+                {/if}
             </div>
-            <img alt="cover-image" width={imgWidth} height={imgWidth} src="{constants.IMG_URL}{item["imgUrl"]}"/>
+            <img alt="cover-image" width={imgWidth} height={imgWidth} src="{constants.IMG_URL}{item["img-url"]}"/>
         </li>
     {/each}
 </ul>
@@ -111,6 +125,18 @@
                 @include respond-to('w600') {
                     align-self: auto;
                     padding: 30px 0;
+                }
+
+                a.btn-go {
+                    display: inline-block;
+                    color:$theme-color2;
+                    border-radius: 30px;
+                    font-size: 0.8em;
+                    font-weight: 300;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
                 }
 
                 :global(h1.cover-title-bold) {

@@ -1,149 +1,76 @@
 <script>
-    import * as constants from '../../assets/js/constants.js';
-    import { onMount, tick } from 'svelte';
+    import * as constants   from '../../assets/js/constants.js';
+    import { onMount, tick, beforeUpdate } from 'svelte';
+    import axios            from "axios";
+    import { slide }        from 'svelte/transition';
 
-    let finishedEvents = [
-        {
-            "event_title": "내. 동년배들. 다. 커리어로. 콘텐츠 만든다.",
-            "link_url": "https://www.instagram.com/p/B8swwiAnNkf/",
-            "date": "2020-02-07",
-        },{
-            "event_title": "읽고해봐: 생각하는 힘은 유일한 무기가 된다",
-            "link_url": "https://www.instagram.com/p/B9oJq6DnfqO/",
-            "date": "2020-02-14",
-        },{
-            "event_title": "읽고해봐 온라인: 울트라러닝",
-            "link_url": "https://www.instagram.com/p/B-LmxZvnEDC/",
-            "date": "2020-03-21",
-        },{
-            "event_title": "프로젝트 플러스원: 22일 습관 만들기",
-            "link_url": "https://www.instagram.com/p/B_t1Shnn2Vp/",
-            "date": "2020-04-09",
-        },{
-            "event_title": "유니콘 스타트업 케이스 스터디",
-            "link_url": "",
-            "date": "2020-05-20",
-        },
-    ]
-
-    let upcomingEvents = [
-        {
-            "event_title": "유니콘 스타트업 케이스 스터디",
-            "link_url": "https://www.notion.so/realwesen/Startup-Mini-MBA_Unicorn-Startup-Case-Study-a18005598aaa419cae48fc093e15c665",
-            "date": "2020-06-17",
-        },{
-            "event_title": "읽고해봐: 신뢰이동",
-            "link_url": "https://www.notion.so/realwesen/6-109f69cb185040d0976bf4b4c2f94f0f",
-            "date": "2020-06-20",
-        },{
-            "event_title": "네 안에 필살기 있다 : 나의 프로젝트로 필살기 발견하기 워크샵",
-            "link_url": "https://www.notion.so/realwesen/3a707e3c2ea64736aaaa7a2387d46228",
-            "date": "2020-06-23",
-        }
-    ]
-
-    let communityMessages = [
-        {
-            "text": "프로젝트로 만난 사이",
-            "link_url": "https://blog.allius.io",
-        },{
-            "text": "내 브랜드, 니 브랜드, 우리 프로젝트",
-            "link_url": "https://blog.allius.io",
-        },{
-            "text": "프로젝트로 만든 브랜드",
-            "link_url": "https://blog.allius.io",
-        },{
-            "text": "처음 뵙겠습니다",
-            "link_url": "https://blog.allius.io",
-        },{
-            "text": "나의 경험이 브랜드가 되는 얼라이어스",
-            "link_url": "https://blog.allius.io",
-        },
-    ]
-
-    let communityEventList;
-    let boxWidth;
-    let scrollWidth;
-    let scrollX;  
-    $: handleScroll(scrollX);  
-
+    let eventsList;
 
     const mixArray = (a, b) => {  
         return 0.5 - Math.random();
     }  
 
-    const handleScroll = (x) => {
-        if (x){
-            communityEventList.scrollTo(x, 0);
-        } else if ( x === 0){
-            communityEventList.scrollTo(x, 0);
-        }
-    }
-
-    const handleScrollX = () => {
-        scrollX = communityEventList.scrollLeft;
+    const listView = (lists, idx) => {
+        eventsList[lists][idx].selected = !eventsList[lists][idx].selected;
     }
 
     onMount( async () => {
-        communityMessages = communityMessages.sort(mixArray);
-        await tick();
-        communityEventList.scrollTo((boxWidth*5.5)-(scrollWidth/2-20), 0);
+        axios.get(`http://${constants.SERVER_API}/page-management/community-events/list/landing`)
+            .then(resp => {
+                for (let lists in resp.data){
+                    resp.data[lists].forEach( item => {
+                        item.date = new Date(item["date"]);
+                        item.selected = false;
+                    });
+                }
+                return resp.data
+            })
+            .then(data => {
+                eventsList = data;
+            });
     });
 </script>
 
 <div class="community-events-wrapper">
     <slot></slot>
-    <ul bind:this={communityEventList} bind:clientWidth={scrollWidth} on:scroll={() => handleScrollX()}>
-        {#each finishedEvents as item}
-            {#if !item["link_url"]}
-            <li class="events-done">
-                <a href="javascript:void(0);" class="event-box">
-                    <p><span class="event-status">we did</span>{item["event_title"]}</p>
-                    <span class="event-date">{item["date"]}</span>
-                </a>
-            </li>
-            {:else}
-            <li class="events-done">
-                <a href={item["link_url"]} target="_blank" class="event-box">
-                    <p><span class="event-status">we did</span>{item["event_title"]}</p>
-                    <span class="event-date">{item["date"]}</span>
-                </a>
-            </li>
-            {/if}
-        {/each}
-            <li class="events-main" bind:clientWidth={boxWidth}>
-                <div class="event-box">
-                    <span class="arrow-left">swipe left. 지난 이벤트</span>
-                    <p>allius 커뮤니티 이벤트에 함께하세요.</p>
-                    <span class="arrow-right">swipe right. 예정된 이벤트</span>
-                </div>
-            </li>
-        {#each upcomingEvents as item}
-            {#if !item["link_url"]}
-            <li class="events-upcoming" >
-                <a href="javascript:void(0);" class="event-box">
-                    <p><span class="event-status">upcoming</span>{item["event_title"]}</p>
-                    <span class="event-date">{item["date"]}</span>
-                </a>
-            </li>
-            {:else}
-            <li class="events-upcoming">
-                <a href={item["link_url"]} target="_blank" class="event-box">
-                    <p><span class="event-status">upcoming</span>{item["event_title"]}</p>
-                    <span class="event-date">{item["date"]}</span>
-                </a>
-            </li>
-            {/if}
-        {/each}
-        {#each communityMessages as item, idx}
-            {#if idx < (5-upcomingEvents.length)}
-                <li class="community-msg">
-                    <a href="javascript:void(0);" class="event-box">{item["text"]}</a>
+    <div class="list-wrapper">
+        {#if eventsList}
+        <ul class="upcoming-events">
+            <li class="list-name">Upcoming</li>
+            {#each eventsList.upcoming_events as item, idx}
+                <li class="list-item unselected" on:click={()=>listView("upcoming_events", idx)}>
+                    <p class="event-title">{item.title}</p>
+                    <p class="event-date">{`${item.date.getFullYear()}년 ${item.date.getMonth()}월 ${item.date.getDate()}일`}</p>
                 </li>
-            {/if}
-        {/each}
-    </ul>
-    <input type="range" bind:value={scrollX} max={(boxWidth*11)-scrollWidth+50} >
+                {#if item.selected}
+                    <li class="selected" transition:slide|local>
+                        <span class="event-description">{item.description}</span>
+                        {#if item.link_url}
+                            <a href={item.link_url} target="_blank">바로가기</a>
+                        {/if}
+                    </li>
+                {/if}
+            {/each}
+        </ul>
+        <ul class="finished-events">
+            <li class="list-name">We did</li>
+            {#each eventsList.finished_events as item, idx}
+                <li class="list-item unselected" on:click={()=>listView("finished_events", idx)}>
+                    <p class="event-title">{item.title}</p>
+                    <p class="event-date">{`${item.date.getFullYear()}년 ${item.date.getMonth()}월 ${item.date.getDate()}일`}</p>
+                </li>
+                {#if item.selected}
+                    <li class="selected" transition:slide|local>
+                        <span class="event-description">{item.description}</span>
+                        {#if item.link_url}
+                            <a href={item.link_url} target="_blank">바로가기</a>
+                        {/if}
+                    </li>
+                {/if}
+            {/each}
+        </ul>
+        {/if}
+    </div>
 </div>
 
 <style lang="scss">
@@ -151,233 +78,82 @@
 
     .community-events-wrapper {
 
-        ul {
+        .list-wrapper{
+            margin-top: 30px;
             display: flex;
-            overflow-x: auto;
-            margin-top: 20px;
-            flex-wrap: nowrap;
-            width: auto;
+            justify-content: space-between;
+            font-size: 0.9em;
 
-            @include respond-to('w800') {
-                font-size: 1.1em;
-            }
-
-
-            &::-webkit-scrollbar {
-                display: none;
-            }
-
-            li {
-                flex: 0 0 auto;
-                font-family: $font-kr;
+            ul {
                 display: block;
-                margin-right: 3px;
+                width: 50%;
+                padding-right: 20px;
 
-                &:last-child {
-                    margin-right: 0;
-                }
+                li {
+                    display: block;
 
-                .event-box {
-                    display: flex;
-                    width: 240px;
-                    height: 240px;
-                    background-color: $theme-color2;
-                    padding: 14px;
-                    color: white;
-                    overflow-y: scroll;
-                    flex-direction: column;
-                    justify-content: space-between;
-
-                    &::-webkit-scrollbar {
-                        display: none;
+                    &.list-name {
+                        border-left: 6px solid $theme-color1;
+                        color: $theme-color1;
+                        padding-left: 12px;
+                        margin-bottom: 12px;
+                        z-index: 30;
                     }
 
-                    p {
-                        font-weight: 700;
-                        font-size: 1.2em;
-                        line-height: 1.4em;
-                        margin-bottom: 5px;
+                    &.list-item {
+                        font-size: 0.8em;
+                        padding: 10px 3px;
+                        color: $sub-color1;
+                        border-top: 1px solid #cccccc;
+                        background-color: white;
 
-                        .event-status {
-                            font-size: 0.6em;
-                            font-weight: 400;
-                            line-height: 1em;
-                            margin-top: 0;
-                            margin-bottom: 5px;
+                        .event-title {
+                            margin-bottom: 0;
+                        }
+
+                        .event-date {
+                            display: block;
+                            font-size: 0.8em;
+                            color: $theme-color1;
+                        }
+
+                        &:hover {
+                            cursor: pointer;
+                            background-color: #f8f8f8;
                         }
                     }
 
-                    span {
-                        display: block;
-                        font-size: 0.75em;
-                        margin-top: 5px;
-                    }
-
-                    span.event-date {
-                        text-align: left;
-                        margin-top: 0;
-                        padding-bottom: 10px;
+                    &.selected {
                         font-size: 0.8em;
+                        padding: 0px 3px 10px;
+                        color: $sub-color1;
+                        background-color:white;
+                        z-index: 10;
+
+                        a {
+                            display: inline-block;
+                            padding: 1px 12px;
+                            background-color: $theme-color1;
+                            border-radius: 10px;
+                            color: white;
+                            font-size: 0.7em;
+                            margin-left: 20px;
+                        }
                     }
                 }
             }
 
-            li.events-main {
-                padding: 5px;
-                background-color: $sub-color1;
+            @include respond-to('w800') {
+                font-size: 1em;
+                display: block;
 
-                .event-box {
-                    width: 230px;
-                    height: 230px;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                    background-color: $sub-color1;
-                    color: white;
-                    padding: 5px 15px 10px;
-                    border: 1px solid white;
-
-                    p {
-                        font-size: 1em;
-                    }
-
-                    span {
-                        font-size: 0.7em;
-                    }
-
-                    span.arrow-right {
-                        text-align: right;
-                    }
+                ul {
+                    width: 100%;
+                    margin-bottom: 50px;
+                    padding: 0;
                 }
+                
             }
-
-            li.events-upcoming {
-                .event-box {
-                    background-color: $theme-color1;
-                    color: $sub-color2;
-                }
-            }
-
-            li.community-msg {
-                .event-box {
-                    font-weight: 700;
-                    font-size: 1.5em;
-                    background-color: $sub-color2;
-                    color: $sub-color1;
-                    padding: 20px;
-                }
-            }
-        }
-
-        input[type=range] {
-            display: block;
-            margin-top: 22px;
-            width: 300px;
-
-            @include respond-to('w600') {
-                display: none;
-            }
-
-            //기존 디자인 숨기기
-            -webkit-appearance: none; 
-            width: 100%;
-            background: transparent;
-
-            &::-webkit-slider-thumb {
-                -webkit-appearance: none;
-            }
-            
-            &:focus {
-                outline: none;
-            }
-
-            &::-ms-track {
-                width: 100%;
-                cursor: pointer;
-
-                background: transparent; 
-                border-color: transparent;
-                color: transparent;
-            }
-
-            // thumb 수정
-            &::-webkit-slider-thumb {
-                -webkit-appearance: none;
-                height: 24px;
-                width: 8px;
-                border-radius: 5px;
-                background: lighten($theme-color1, 20%);
-                cursor: pointer;
-                margin-top: -9px;
-                border: none;
-            }
-
-            &::-moz-range-thumb {
-                height: 24px;
-                width: 8px;
-                border-radius: 5px;
-                background: lighten($theme-color1, 20%);
-                cursor: pointer;
-                border: none;
-            }
-
-            &::-ms-thumb {
-                height: 24px;
-                width: 8px;
-                border-radius: 5px;
-                background: lighten($theme-color1, 20%);
-                cursor: pointer;
-                border: none;
-            }
-
-            // track 수정
-            &::-webkit-slider-runnable-track {
-                width: 100%;
-                height: 4px;
-                cursor: pointer;
-                background: #f3f3f3;
-                border-radius: 2px;
-            }
-
-            &:focus::-webkit-slider-runnable-track {
-                background: #f3f3f3;
-            }
-
-            &::-moz-range-track {
-                width: 100%;
-                height: 4px;
-                cursor: pointer;
-                background: #f3f3f3;
-                border-radius: 2px;
-            }
-
-            &::-ms-track {
-                width: 100%;
-                height: 4px;
-                cursor: pointer;
-                background: transparent;
-                border-color: transparent;
-                color: transparent;
-            }
-
-            &::-ms-fill-lower {
-                background: #f3f3f3;
-                border-radius: 2px;
-            }
-
-            &:focus::-ms-fill-lower {
-                background: #f3f3f3;
-            }
-
-            &::-ms-fill-upper {
-                background: #f3f3f3;
-                border-radius: 2px;
-            }
-
-            &:focus::-ms-fill-upper {
-                background: #f3f3f3;
-            }
-
         }
     }
 </style>

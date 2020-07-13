@@ -3,8 +3,6 @@
     
     import Header   from '../Components/Header.svelte';
     import Footer   from '../Components/Footer.svelte';
-    import Meta     from '../Components/Meta.svelte';
-    import Terms    from '../Components/Terms.svelte';
 
 
 </script>

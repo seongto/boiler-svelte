@@ -2,7 +2,7 @@
     import { Router, Link, Route } from "svelte-routing"
     import { onMount }      from 'svelte'
 
-    let loginCheck;
+    export let loginCheck;
 
     const getCookie = (key) => {
         let value = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
@@ -10,13 +10,6 @@
     };
 
     onMount(() => {
-        let addrs = location.href.substring(location.protocol.length).slice(2,11);
-
-        if (location.protocol !== 'https:') {
-            if ((addrs !== 'localhost') && (addrs !== 'dev0828rw')) {
-                location.replace(`https:${location.href.substring(location.protocol.length)}`);
-            }
-        }
 
         loginCheck = Boolean(getCookie('allius_id'));
         

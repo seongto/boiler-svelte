@@ -9,7 +9,7 @@
     import Footer from '../Components/Footer.svelte';
     import Meta from '../Components/Meta.svelte';
 
-
+    let loginCheck;
     let winWidth = window.innerWidth;
     $: imgWidth = (winWidth > 1000) ? 440 : winWidth*0.44;
     $: cardWidth = (winWidth > 1000) ? 280 : winWidth*0.3;
@@ -17,9 +17,9 @@
 
 </script>
 
-<Header />
+<Header bind:loginCheck={loginCheck} />
 <div class="sections cover">
-    <CoverSection imgWidth={imgWidth} />
+    <CoverSection imgWidth={imgWidth} {loginCheck} />
 </div>
 <div class="sections">
     <BrandStorySection>
@@ -34,8 +34,8 @@
 </div>
 <div class="sections">
     <CommunityEventsSection>
-        <h2 class="section-title">Community Activity</h2>
-        <p class="section-description">allius 커뮤니티 활동에 참여하세요.</p>
+        <h2 class="section-title">allius는 이런 커뮤니티입니다.</h2>
+        <p class="section-description">allius 커뮤니티 이벤트에 참여하세요.</p>
     </CommunityEventsSection>
 </div>
 <Footer />

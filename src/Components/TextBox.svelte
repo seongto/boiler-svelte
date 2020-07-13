@@ -3,7 +3,7 @@
     export let className;
     export let context;
 
-    let textArray = context.split("\n");
+    let textArray = typeof(context) === "string" ? context.split("\n") : [];
 
 </script>
 

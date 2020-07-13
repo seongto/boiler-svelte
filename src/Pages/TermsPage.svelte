@@ -7,6 +7,14 @@
     import Meta     from '../Components/Meta.svelte';
     import Terms    from '../Components/Terms.svelte';
 
+    let metadata = {
+        title: 'allius',
+        description: 'allius 서비스 이용 약관',
+        image: `${constants.IMG_URL}/static-images/meta_img_01.jpg`,
+        imageAlt: '나의 브랜드로 만드는 기회',
+        url:'https://home.allius.io/terms'
+    };
+
     let scrollY;
 
     onMount(() => {
@@ -16,6 +24,7 @@
 
 </script>
 
+<Meta {metadata}/>
 
 <Header />
 <div class="sections">
