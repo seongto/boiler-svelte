@@ -1,4 +1,4 @@
-export const TOKEN_KEY = "allius_love";
+export const TOKEN_KEY = "auth_manager";
 export const SERVER_API = '34.64.126.239:8000'
 
 //백엔드를 로컬로-

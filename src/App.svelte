@@ -1,8 +1,9 @@
 <script>
 	import { Router, Route, Link } from "svelte-routing";
 	import Home from "./Pages/Home.svelte";
-	import TermsPage from "./Pages/TermsPage.svelte";
-	import PrivacyPage from "./Pages/PrivacyPage.svelte";
+	import Login from "./Pages/Login.svelte";
+	import ManageBrandStories from "./Pages/ManageBrandStories.svelte";
+	import ManageCommunityEvents from "./Pages/ManageCommunityEvents.svelte";
 	import NotFound from "./Pages/NotFound.svelte";
 
 	export let url = "";
@@ -10,8 +11,10 @@
 </script>
 
 <Router url="{url}">
-	<Route path="terms" component="{TermsPage}" /> 
-	<Route path="privacy" component="{PrivacyPage}" /> 
+	<Route path="manage/stories" component="{ManageBrandStories}" /> 
+	<Route path="manage/events" component="{ManageCommunityEvents}" /> 
+	<Route path="manage" component="{ManageBrandStories}" />
+	<Route path="auth-login" component="{Login}" />
 	<Route path="/"><Home /></Route>
 	<Route path="*" component="{NotFound}" /> 
 </Router>

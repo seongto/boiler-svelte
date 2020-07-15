@@ -1,34 +1,36 @@
 <script>
-    import { Router, Link, Route } from "svelte-routing"
-    import { onMount }      from 'svelte'
+    import { Link, navigate }  from "svelte-routing"
+    import { onMount }         from 'svelte'
+    import * as constants      from '../assets/js/constants.js';
 
-    export let loginCheck;
+    let token;
 
-    const getCookie = (key) => {
-        let value = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
-        return value? value[2] : null;
-    };
+    const logOut = () => {
+        localStorage.removeItem(constants.TOKEN_KEY);
+        navigate("/auth-login", { replace: true });
+    }
 
     onMount(() => {
-
-        loginCheck = Boolean(getCookie('allius_id'));
-        
+        token = localStorage.getItem(constants.TOKEN_KEY);
+        if (!token) {
+            navigate("/auth-login", {replace: true});
+        }
     });
 </script>
 
 <div class="header">
     <div class="header-wrapper">
-        <Link to="/"><div class="logo">allius</div></Link>
+        <Link to="/"><div class="logo">allius admin</div></Link>
         <ul>
-            {#if loginCheck}
-                <li>
-                    <a href="https://allius.io/desk" target="_self">Studio</a>
-                </li>
-            {:else}
-                <li>
-                    <a href="https://allius.io/login" target="_self">Login</a>
-                </li>
-            {/if}
+            <li>
+                <Link to="manage/stories"><span>스토리 관리</span></Link>
+            </li>
+            <li>
+                <Link to="manage/events"><span>이벤트 관리</span></Link>
+            </li>
+            <li>
+                <span class="logout" on:click={logOut}>로그아웃</span>
+            </li>
         </ul>
     </div>
 </div>
@@ -48,7 +50,7 @@
         .header-wrapper {
             margin: 0 auto;
             max-width: $wrapper;
-            padding: 12px 30px;
+            padding: 15px 30px 10px;
             display: flex;
             justify-content: space-between;
 
@@ -58,24 +60,40 @@
             
             .logo {
                 display: block;
-                text-indent: -9999px;
-                background-image: url("https://allius.io/assets/img/allius-logo.png");
-                background-position: center;
-                background-size: cover;
-                background-repeat: no-repeat;
-                width: 65px;
-                height: 23px;
+                font-family: $font-kr;
+                font-size: 20px;
+                font-weight: 700;
+                color: $theme-color1;
             }
 
-            li a {
-                font-family: $font-kr;
-                font-size: 12px;
-                display: block;
-                float: right;
-                padding: 4px 12px;
-                border-radius: 4px;
-                color: $theme-color1;
-                border: 1px solid $theme-color1;
+            ul{
+                
+                li {
+                    display: block;
+                    margin-left: 15px;
+                    float: left;
+
+                    span {
+                        font-family: $font-kr;
+                        font-size: 15px;
+                        display: block;
+                        padding: 6px 0px;
+                        color: $theme-color1;
+                        border-top: 2px solid $theme-color1;
+                        transition: 0.2s all;
+                        cursor: pointer;
+
+                        &.logout {
+                            color: $theme-color2;
+                            border-top-color: $theme-color2;
+                        }
+
+                        &:hover{
+                            border-top-width: 5px;
+                            padding-top: 3px;
+                        }
+                    }
+                }
             }
         }
     }
