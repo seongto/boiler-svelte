@@ -13,7 +13,12 @@
     let communityEvents;
     let token = localStorage.getItem(constants.TOKEN_KEY);
     let newEventsDisplay = false;
-    let newEvents = {};
+    let newEvents = {
+        "title": null,
+        "description": null,
+        "link_url": null,
+        "date": null,
+    };
     let timeNow = new Date();
 
     const activateEdit = (idx) => {
@@ -34,7 +39,8 @@
         return [year, month, day].join('-');
     }
 
-    const submitChange = (event) => {
+    const submitChange = (eventData) => {
+        console.log(newEvents);
         axios({
             method: 'post',
             url: `http://${constants.SERVER_API}/admin-management/community-events/event/update`,
@@ -42,11 +48,11 @@
                 "Authorization": token,
             },
             data: {
-                "id": event.id,
-                "title": event.title,
-                "description": event.description,
-                "link_url": event.link_url,
-                "date": event.date + " 00:00:00",
+                "id": eventData.id,
+                "title": eventData.title,
+                "description": eventData.description,
+                "link_url": eventData.link_url,
+                "date": eventData.date + " 00:00:00",
             }
         })
         .then(resp => {
@@ -57,8 +63,7 @@
         });
     }
 
-    const submitNewEvents = (event) => {
-        console.log(typeof(event.date));
+    const submitNewEvents = (eventData) => {
         axios({
             method: 'post',
             url: `http://${constants.SERVER_API}/admin-management/community-events/event/create`,
@@ -66,15 +71,20 @@
                 "Authorization": token,
             },
             data: {
-                "title": event.title,
-                "description": event.description,
-                "link_url": event.link_url,
-                "date": event.date + " 00:00:00",
+                "title": eventData.title,
+                "description": eventData.description,
+                "link_url": eventData.link_url,
+                "date": eventData.date + " 00:00:00",
             }
         })
         .then(resp => {
             newEventsDisplay = false;
-            newEvents = {};
+            newEvents = {
+                "title": null,
+                "description": null,
+                "link_url": null,
+                "date": null,
+            };
             reloadData();
         })
         .catch(function (error){
@@ -155,11 +165,11 @@
         .then(resp => {
             let events = resp.data["events_list"];
             
-            events.forEach( event => {
-                event.date = formatDate(event.date);
-                event.editing = false;
+            events.forEach( el => {
+                el.date = formatDate(el.date);
+                el.editing = false;
             });
-            
+            console.log(events);
             communityEvents = events;
         })
         .catch(function (error) {
@@ -200,43 +210,43 @@
     {/if}
     <ul class="section-contents">
         {#if communityEvents}
-            {#each communityEvents as event, idx}
+            {#each communityEvents as el, idx}
                 <li>
-                    {#if event.status_id === 101}
-                        <button class={"status-btn"} on:click={()=>toggleStatus(event.id)}>Upcoming</button>
+                    {#if el.status_id === 101}
+                        <button class={"status-btn"} on:click={()=>toggleStatus(el.id)}>Upcoming</button>
                     {:else}
-                        <button class={"status-btn finished"} on:click={()=>toggleStatus(event.id)}>Finished</button>
+                        <button class={"status-btn finished"} on:click={()=>toggleStatus(el.id)}>Finished</button>
                     {/if}
-                    <button class={event.is_public? "public-btn on-public" : "public-btn"} on:click={()=>togglePublic(event.id)}>{event.is_public? "공개 중" : "비공개 중"}</button>
-                    {#if !event.editing}
+                    <button class={el.is_public? "public-btn on-public" : "public-btn"} on:click={()=>togglePublic(el.id)}>{el.is_public? "공개 중" : "비공개 중"}</button>
+                    {#if !el.editing}
                         <button class="edit-btn" on:click={()=>activateEdit(idx)}>편집</button>
                         <div class="title">
-                            <strong>제목</strong><span>{event.title}</span>
+                            <strong>제목</strong><span>{el.title}</span>
                         </div>
-                        <div class={(event.status_id===101)&&(event.date < timeNow)?"date warning" : "date"}>
-                            <strong>날짜</strong><span>{event.date}</span>
+                        <div class={(el.status_id===101)&&(el.date < timeNow)?"date warning" : "date"}>
+                            <strong>날짜</strong><span>{el.date}</span>
                         </div>
                         <div class="link">
-                            <strong>링크</strong><span>{event.link_url}</span>
+                            <strong>링크</strong><span>{el.link_url}</span>
                         </div>
                         <div class="description">
-                            <strong>설명</strong><span>{event.description}</span>
+                            <strong>설명</strong><span>{el.description}</span>
                         </div>
                     {:else}
-                        <button class="edit-btn" on:click={()=>submitChange(event)}>저장</button>
+                        <button class="edit-btn" on:click={()=>submitChange(el)}>저장</button>
                         <button class="brb" on:click={()=>{reloadData()}}>변경 취소</button>
-                        <button class="brb delete-btn" on:click={()=>deleteEvent(event.title, event.id)}>스토리 삭제</button>
+                        <button class="brb delete-btn" on:click={()=>deleteEvent(el.title, el.id)}>스토리 삭제</button>
                         <div class="title">
-                            <strong>제목</strong><input type="text" bind:value={event.title}>
+                            <strong>제목</strong><input type="text" bind:value={el.title}>
                         </div>
                         <div class="date">
-                            <strong>날짜</strong><input type="date" bind:value={event.date}>
+                            <strong>날짜</strong><input type="date" bind:value={el.date}>
                         </div>
                         <div class="link">
-                            <strong>링크</strong><input type="text" bind:value={event.link_url}>
+                            <strong>링크</strong><input type="text" bind:value={el.link_url}>
                         </div>
                         <div class="description">
-                            <strong>설명</strong><input type="text" bind:value={event.description}>
+                            <strong>설명</strong><input type="text" bind:value={el.description}>
                         </div>
                     {/if}
                         
