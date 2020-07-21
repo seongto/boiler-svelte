@@ -40,7 +40,6 @@
     }
 
     const submitChange = (eventData) => {
-        console.log(newEvents);
         axios({
             method: 'post',
             url: `http://${constants.SERVER_API}/admin-management/community-events/event/update`,
@@ -169,7 +168,7 @@
                 el.date = formatDate(el.date);
                 el.editing = false;
             });
-            console.log(events);
+
             communityEvents = events;
         })
         .catch(function (error) {
@@ -178,6 +177,7 @@
     }
 
     onMount(() => {
+        timeNow = formatDate(timeNow);
         reloadData();
     });
 
@@ -206,7 +206,7 @@
             </li>
         </ul>
     {:else}
-        <button class="create-btn" on:click={()=>{ newEventsDisplay = true; }}>새로운 스토리 만들기</button>
+        <button class="create-btn" on:click={()=>{ newEventsDisplay = true; }}>새로운 이벤트 만들기</button>
     {/if}
     <ul class="section-contents">
         {#if communityEvents}
