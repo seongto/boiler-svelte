@@ -6,6 +6,7 @@ import { terser } from 'rollup-plugin-terser';
 
 import scss from 'rollup-plugin-scss';
 import autoPreprocess from 'svelte-preprocess'
+import replace from '@rollup/plugin-replace';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -35,6 +36,16 @@ export default {
 			dedupe: ['svelte']
 		}),
 		commonjs(),
+		replace({
+			FOO: "aaaaaa",
+	  
+			// 2 level deep object should be stringify
+			process: JSON.stringify({
+				env: {
+					isProd: production,
+				}
+			}),
+		}),
 
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated

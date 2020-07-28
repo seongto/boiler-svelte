@@ -5,15 +5,13 @@
     import Footer from '../Components/Footer.svelte';
     import Meta from '../Components/Meta.svelte';
 
-    let loginCheck;
-    let winWidth = window.innerWidth;
-    $: imgWidth = (winWidth > 1000) ? 440 : winWidth*0.44;
-    $: cardWidth = (winWidth > 1000) ? 280 : winWidth*0.3;
-    $: boxPadding = (winWidth > 1000) ? 30 : 0 ;
+    const mssg = process.env.isProd;
+    console.log(mssg);
+    console.log('FOO');
 
 </script>
 
-<Header bind:loginCheck={loginCheck} />
+<Header/>
 
 <Footer />
 
