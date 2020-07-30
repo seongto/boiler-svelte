@@ -22,7 +22,7 @@
     const submitChange = (story) => {
         axios({
             method: 'post',
-            url: `http://${constants.SERVER_API}/admin-management/brand-stories/story/update`,
+            url: `${constants.SERVER_API}/admin-management/brand-stories/story/update`,
             headers: {
                 "Authorization": token,
             },
@@ -45,7 +45,7 @@
     const submitNewStory = (story) => {
         axios({
             method: 'post',
-            url: `http://${constants.SERVER_API}/admin-management/brand-stories/story/create`,
+            url: `${constants.SERVER_API}/admin-management/brand-stories/story/create`,
             headers: {
                 "Authorization": token,
             },
@@ -72,7 +72,7 @@
         if (confirm === '삭제'){
             axios({
                 method: 'post',
-                url: `http://${constants.SERVER_API}/admin-management/brand-stories/story/delete`,
+                url: `${constants.SERVER_API}/admin-management/brand-stories/story/delete`,
                 headers: {
                     "Authorization": token,
                 },
@@ -93,7 +93,7 @@
     const togglePublic = (storyId) => {
         axios({
             method: 'post',
-            url: `http://${constants.SERVER_API}/admin-management/brand-stories/story/change-public`,
+            url: `${constants.SERVER_API}/admin-management/brand-stories/story/change-public`,
             headers: {
                 "Authorization": token,
             },
@@ -112,7 +112,7 @@
     const reloadData = () => {
         axios({
             method: 'get',
-            url: `http://${constants.SERVER_API}/admin-management/brand-stories/list`,
+            url: `${constants.SERVER_API}/admin-management/brand-stories/list`,
             headers: {
                 "Authorization": token,
             }

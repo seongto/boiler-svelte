@@ -11,7 +11,7 @@
     const submitAuth = () => {
         axios({
             method: 'post',
-            url: `http://${constants.SERVER_API}/admin-management/login`,
+            url: `${constants.SERVER_API}/admin-management/login`,
             data: {
                 'user_email': userEmail,
                 'user_pw': userPw,

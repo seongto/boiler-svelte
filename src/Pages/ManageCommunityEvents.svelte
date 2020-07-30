@@ -42,7 +42,7 @@
     const submitChange = (eventData) => {
         axios({
             method: 'post',
-            url: `http://${constants.SERVER_API}/admin-management/community-events/event/update`,
+            url: `${constants.SERVER_API}/admin-management/community-events/event/update`,
             headers: {
                 "Authorization": token,
             },
@@ -65,7 +65,7 @@
     const submitNewEvents = (eventData) => {
         axios({
             method: 'post',
-            url: `http://${constants.SERVER_API}/admin-management/community-events/event/create`,
+            url: `${constants.SERVER_API}/admin-management/community-events/event/create`,
             headers: {
                 "Authorization": token,
             },
@@ -97,7 +97,7 @@
         if (confirm === '삭제'){
             axios({
                 method: 'post',
-                url: `http://${constants.SERVER_API}/admin-management/community-events/event/delete`,
+                url: `${constants.SERVER_API}/admin-management/community-events/event/delete`,
                 headers: {
                     "Authorization": token,
                 },
@@ -118,7 +118,7 @@
     const togglePublic = (eventId) => {
         axios({
             method: 'post',
-            url: `http://${constants.SERVER_API}/admin-management/community-events/event/change-public`,
+            url: `${constants.SERVER_API}/admin-management/community-events/event/change-public`,
             headers: {
                 "Authorization": token,
             },
@@ -137,7 +137,7 @@
     const toggleStatus = (eventId) => {
         axios({
             method: 'post',
-            url: `http://${constants.SERVER_API}/admin-management/community-events/event/change-status`,
+            url: `${constants.SERVER_API}/admin-management/community-events/event/change-status`,
             headers: {
                 "Authorization": token,
             },
@@ -156,7 +156,7 @@
     const reloadData = () => {
         axios({
             method: 'get',
-            url: `http://${constants.SERVER_API}/admin-management/community-events/list`,
+            url: `${constants.SERVER_API}/admin-management/community-events/list`,
             headers: {
                 "Authorization": token,
             }
