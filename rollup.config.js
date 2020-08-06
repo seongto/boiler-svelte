@@ -4,10 +4,12 @@ import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 
-import scss from 'rollup-plugin-scss';
-import autoPreprocess from 'svelte-preprocess'
-import replace from '@rollup/plugin-replace';
+import scss 				from 'rollup-plugin-scss';
+import autoPreprocess 		from 'svelte-preprocess'
+import replace 				from '@rollup/plugin-replace';
+import dotenv               from 'dotenv'
 
+dotenv.config();
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
@@ -36,13 +38,16 @@ export default {
 			dedupe: ['svelte']
 		}),
 		commonjs(),
+		
 		replace({
-			FOO: "aaaaaa",
 	  
 			// 2 level deep object should be stringify
 			process: JSON.stringify({
 				env: {
-					isProd: production,
+					NODE_ENV: process.env.BUILD,
+					TOKEN_KEY: process.env.TOKEN_KEY,
+					SERVER_API: process.env.BUILD === "production" ? process.env.SERVER_API_PROD : process.env.SERVER_API_DEV,
+					IMG_URL: process.env.IMG_URL,
 				}
 			}),
 		}),

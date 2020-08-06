@@ -1,6 +1,4 @@
 <script>
-    import * as constants from '../assets/js/constants.js';
-    
     import Header   from '../Components/Header.svelte';
     import Footer   from '../Components/Footer.svelte';
 

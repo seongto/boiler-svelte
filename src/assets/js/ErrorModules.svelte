@@ -1,14 +1,15 @@
 <script context="module">
-    import * as constants   from './constants.js';
+    import { navigate }   from "svelte-routing";
 
     export const catchError = (error) => {
         if (error.response) {
             if (error.response.status === 401) {
                 window.alert("로그인 정보가 만료되었습니다. 다시 로그인해 주세요.");
-                localStorage.removeItem(constants.TOKEN_KEY);
+                localStorage.removeItem(process.env.TOKEN_KEY);
                 navigate("/auth-login", {replace: false});
-            } 
-            window.alert(error.response.data.comment);
+            } else {
+                window.alert(error.response.data.comment);
+            }
         }
         else {
             console.log('Error', error.message);

@@ -1,11 +1,9 @@
 <script>
-    import * as constants   from '../assets/js/constants.js';
     export let metadata = {
-        title: 'allius',
-        description: '나의 브랜드로 만드는 기회',
-        image: `${constants.IMG_URL}/static-images/meta_img_01.jpg`,
-        imageAlt: '나의 브랜드로 만드는 기회',
-        url:'https://home.allius.io'
+        title: 'svelte',
+        description: 'description',
+        image: `${process.env.IMG_URL}/static-images/sample.png`,
+        imageAlt: 'image',
     };
 </script>
 
